@@ -11,16 +11,16 @@ class Reply extends Model
 
     public function question()
     {
-        $this->hasMany(Reply::class);
+        return  $this->hasMany(Reply::class);
     }
 
     public function likes()
     {
-        $this->hasMany(Like::class);
+        return  $this->hasMany(Like::class,'reply_id','id');
     }
 
     public function user()
     {
-        $this->belongsTo(User::class);
+        return  $this->belongsTo(User::class);
     }
 }

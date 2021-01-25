@@ -43,6 +43,11 @@ class User extends Authenticatable
 
     public function questions()
     {
-        $this->hasMany(Question::class);
+        return  $this->hasMany(Question::class,'user_id','id');
+    }
+
+    public function likes()
+    {
+        return  $this->hasMany(Like::class,'user_id','id');
     }
 }
