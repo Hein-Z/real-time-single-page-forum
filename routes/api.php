@@ -19,5 +19,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('/question', 'QuestionController');
+Route::apiResource('/{question}/reply', 'ReplyController');
 Route::apiResource('/category', 'CategoryController');
 
+Route::post('/{reply}/like', 'LikeController@like');
+Route::post('/{reply}/unlike', 'LikeController@unlike');
+Route::get('/{reply}/likes', 'LikeController@getAllLikes');

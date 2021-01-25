@@ -9,6 +9,8 @@ class Question extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['title', 'slug', 'body', 'category_id', 'user_id'];
+
     public function getRouteKeyName()
     {
         return 'slug';
