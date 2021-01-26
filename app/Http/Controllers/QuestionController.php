@@ -8,6 +8,11 @@ use Symfony\Component\HttpFoundation\Response;
 
 class QuestionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('JWT');
+    }
+
     /**
      * Display a listing of the resource.
      *
