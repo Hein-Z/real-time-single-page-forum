@@ -10,7 +10,7 @@ class QuestionController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('JWT');
+        $this->middleware('JWT',['except' => ['show', 'index']]);
     }
 
     /**
@@ -20,7 +20,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $questions = Question::latest()->get();
+        $questions = Question::with('user','category')->latest()->get();
         return \response()->json($questions);
     }
 

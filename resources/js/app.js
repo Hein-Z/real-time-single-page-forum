@@ -7,21 +7,13 @@
 require('./bootstrap');
 
 window.Vue = require('vue').default;
+window.User = require('./helper/User.js').default;
 
-/**
- * The following block of code may be used to automatically register your
- * Vue components. Itconst router = new VueRouter({
-  routes // short for `routes: routes`
-}) will recursively scan this directory for the Vue
- * components and automatically register them with their "basename".
- *
- * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
- */
+Vue.prototype.$eventHub = new Vue(); // Global event bus
 
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
-Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -29,10 +21,10 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
+import vuetify from './vuetify';
+import App from './App.vue'
+import router from './router/router';
 
-import vuetify from './veautify'
-import App from './App'
-import router from './router/router'
 
 const app = new Vue({
     vuetify,
