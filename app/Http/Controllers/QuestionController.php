@@ -10,7 +10,7 @@ class QuestionController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('JWT',['except' => ['show', 'index']]);
+        $this->middleware('JWT', ['except' => ['show', 'index']]);
     }
 
     /**
@@ -20,7 +20,7 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        $questions = Question::with('user','category')->latest()->get();
+        $questions = Question::with('user', 'category')->latest()->get();
         return \response()->json($questions);
     }
 
@@ -52,9 +52,11 @@ class QuestionController extends Controller
      * @param \App\Models\Question $question
      * @return \Illuminate\Http\Response
      */
-    public function show(Question $question)
+    public function show($slug)
     {
-        return \response()->json($question);
+        $question = Question::where('slug', $slug)->with('user', 'category')->first();
+        $replies = $question->replies()->with('user')->get();
+        return \response()->json(['question' => $question, 'replies' => $replies]);
     }
 
     /**

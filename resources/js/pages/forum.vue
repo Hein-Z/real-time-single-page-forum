@@ -2,7 +2,7 @@
     <div class="row mt-8">
         <question v-for="question in questions"
                   :key="question.id"
-                  :id="question.id" :title="question.title" :body="question.body"
+                  :title="question.title" :body="question.body"
                   :slug="question.slug" :created-at="question.created_at"
                   :category-name="question.category.name"
                   :user-name="question.user.name"

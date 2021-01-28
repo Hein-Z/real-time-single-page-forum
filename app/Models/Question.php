@@ -18,7 +18,7 @@ class Question extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->select(array('id','name'));
     }
 
     public function replies()
@@ -28,11 +28,11 @@ class Question extends Model
 
     public function category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Category::class)->select(array('id','name'));
     }
 
-    public function getPathAttribute()
-    {
-        return 'api/question/' . $this->slug;
-    }
+//    public function getPathAttribute()
+//    {
+//        return 'api/question/' . $this->slug;
+//    }
 }
