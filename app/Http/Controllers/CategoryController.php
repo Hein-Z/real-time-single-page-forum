@@ -22,7 +22,7 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $categories = Category::latest()->get();
+        $categories = Category::latest()->get(["name","id"]);
         return \response()->json($categories);
     }
 

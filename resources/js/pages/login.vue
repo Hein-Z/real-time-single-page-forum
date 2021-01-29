@@ -22,12 +22,12 @@
                 required
             ></v-text-field>
 
-            <v-btn
-                color="primary"
+            <button
+                class="btn btn-primary"
                 @click="login"
             >
                 Submit
-            </v-btn>
+            </button>
         </v-form>
     </v-app>
 </template>
@@ -55,8 +55,8 @@ export default {
                     .then(res => {
                         User.responseAfterLogin(res)
                         if (User.isLoggedIn()) {
-                            this.$router.push({name: 'forum'});
                             this.$eventHub.$emit('logged-in');
+                            this.$router.push({name: 'forum'});
                         }
                     }).catch(err => console.log(err.response));
             }

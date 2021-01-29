@@ -29,38 +29,38 @@
                     <v-list-item-content>
                         <v-list-item-title>{{ user_name === current_user_id ? 'You' : user_name }}</v-list-item-title>
                     </v-list-item-content>
-
-<!--                    <v-row-->
-<!--                        align="center"-->
-<!--                        justify="end"-->
-<!--                    >-->
-<!--                        <v-icon class="mr-1">-->
-<!--                            mdi-heart-->
-<!--                        </v-icon>-->
-<!--                        <span class="subheading mr-2">256</span>-->
-<!--                    </v-row>-->
                 </v-list-item>
             </v-card-actions>
         </v-card>
+        <reply-input :question="question.slug" @reply="createReply"></reply-input>
         <reply v-for="reply in replies" :key="reply.id" :reply='reply' :current_user_id="current_user_id"></reply>
     </div>
 </template>
 <script>
 
 import reply from '../components/reply';
+import replyInput from "../components/replyInput";
 
 export default {
     components: {
-        reply
+        reply,
+        replyInput
     },
     data: () => ({
         backgroundColor: '#' + (Math.random() * 0xDDDDDD << 0).toString(16),
         question: {},
         category: '',
         user_name: '',
-        replies: {},
+        replies: [],
         current_user_id: User.id()
     }),
+    methods: {
+        createReply(data) {
+            // let reply=data.reply;
+            // reply.user=
+            this.replies.push(data.reply);
+        }
+    },
     created() {
         axios.get('/api/question/' + this.$route.params.slug).then(
             res => {

@@ -42,6 +42,11 @@ class QuestionController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required',
+            'body' => 'required',
+            'category_id' => 'required|numeric',
+        ]);
         $question = auth()->user()->questions()->create($request->all());
         return \response()->json($question);
     }

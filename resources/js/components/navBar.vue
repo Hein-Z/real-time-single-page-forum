@@ -71,7 +71,8 @@ export default {
             isLoggedIn: null,
             mini: true,
             items: [
-                {title: 'Home', icon: 'mdi-home-city', to: '/forum', show: true},
+                {title: 'Forum', icon: 'mdi-home-city', to: '/forum', show: true},
+                {title: 'Create Question', icon: 'mdi-comment-question', to: '/question/create', show: User.isLoggedIn()},
                 {title: 'Login', icon: 'mdi-login', to: '/login', show: !User.isLoggedIn()},
                 {title: 'Sign Up', icon: 'mdi-account-multiple-plus', to: '/register', show: !User.isLoggedIn()}
             ],
@@ -81,8 +82,13 @@ export default {
     watch: {
         isLoggedIn() {
             this.items.forEach((item, index) => {
-                if (index !== 0)
-                    item.show = !this.isLoggedIn
+                if (index !== 0) {
+                    if (index === 1) {
+                        item.show = this.isLoggedIn
+                    } else {
+                        item.show = !this.isLoggedIn
+                    }
+                }
             });
             this.logoutItem.show = this.isLoggedIn;
         }

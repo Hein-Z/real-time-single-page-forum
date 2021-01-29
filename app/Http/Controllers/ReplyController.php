@@ -28,8 +28,10 @@ class ReplyController extends Controller
      */
     public function store(Request $request, Question $question)
     {
-        $reply = $question->replies()->create($request->all());
-        return response()->json($reply);
+        $request->validate(["body" => 'required']);
+        $reply = $question->replies()->create(['body' => $request->body, 'user_id' => auth()->user()->id]);
+        $reply->user;
+        return response()->json(['reply' => $reply]);
     }
 
     /**
