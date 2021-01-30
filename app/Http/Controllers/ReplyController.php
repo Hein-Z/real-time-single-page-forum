@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Question;
 use App\Models\Reply;
+use App\Notifications\ReplyNotification;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -30,8 +31,10 @@ class ReplyController extends Controller
     {
         $request->validate(["body" => 'required']);
         $reply = $question->replies()->create(['body' => $request->body, 'user_id' => auth()->user()->id]);
-        $reply->user;
-        return response()->json(['reply' => $reply]);
+        $user = $reply->question->user;
+
+        $user->notify(new ReplyNotification($reply));
+        return response()->json(['reply' => $reply, 'question' => $reply->question]);
     }
 
     /**

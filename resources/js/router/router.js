@@ -5,6 +5,7 @@ import register from '../pages/register'
 import forum from '../pages/forum'
 import read from '../pages/read'
 import create from '../pages/create'
+import notification from "../pages/notification";
 
 Vue.use(VueRouter);
 
@@ -48,6 +49,14 @@ const routes = [
     {
         path: '/question/create', component: create,
         name: 'question-create',
+        meta: {
+            log: false,
+            auth: true
+        }
+    },
+    {
+        path: '/notification', component: notification,
+        name: 'notification',
         meta: {
             log: false,
             auth: true

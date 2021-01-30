@@ -24,6 +24,10 @@ Route::apiResource('/category', 'CategoryController');
 
 Route::post('/{reply}/like', 'LikeController@like');
 Route::post('/{reply}/unlike', 'LikeController@unlike');
+Route::post('/notification', 'NotificationController@getNoti');
+Route::get('/markAsRead/{id}', 'NotificationController@markAsRead');
+
+
 Route::get('/{reply}/likes', 'LikeController@getAllLikes');
 
 Route::group([

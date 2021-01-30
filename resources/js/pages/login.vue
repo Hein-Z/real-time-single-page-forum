@@ -24,7 +24,6 @@
 
             <button
                 class="btn btn-primary"
-                @click="login"
             >
                 Submit
             </button>

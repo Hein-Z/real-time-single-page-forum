@@ -32,10 +32,10 @@ class Question extends Model
         return $this->belongsTo(Category::class)->select(array('id', 'name'));
     }
 
-//    public function getPathAttribute()
-//    {
-//        return 'api/question/' . $this->slug;
-//    }
+    public function getPathAttribute()
+    {
+        return 'api/question/' . $this->slug;
+    }
     public static function boot()
     {
         parent::boot();

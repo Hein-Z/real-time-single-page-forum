@@ -8,20 +8,21 @@ use Illuminate\Database\Eloquent\Model;
 class Reply extends Model
 {
     use HasFactory;
-    protected $fillable=['user_id','question_id','body'];
+
+    protected $fillable = ['user_id', 'question_id', 'body'];
 
     public function question()
     {
-        return  $this->hasMany(Reply::class);
+        return $this->belongsTo(Question::class);
     }
 
     public function likes()
     {
-        return  $this->hasMany(Like::class,'reply_id','id');
+        return $this->hasMany(Like::class, 'reply_id', 'id');
     }
 
     public function user()
     {
-        return  $this->belongsTo(User::class)->select(array('id','name'));
+        return $this->belongsTo(User::class)->select(array('id', 'name'));
     }
 }

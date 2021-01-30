@@ -5,7 +5,6 @@
             ref="form"
             v-model="valid"
             lazy-validation
-            @submit.prevent="login"
             class="mt-16"
         >
 
@@ -49,7 +48,7 @@
             ></v-text-field>
             <small
                 class="text-center text-danger">{{
-                password !== password_confirmation ? 'Password do not match' : ''
+                    password !== password_confirmation ? 'Password do not match' : ''
                 }}</small>
             <br>
             <v-btn
