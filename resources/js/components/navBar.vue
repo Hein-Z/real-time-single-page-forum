@@ -124,6 +124,11 @@ export default {
             this.noti_count = noti_count;
         });
         this.$eventHub.$on('markAsRead', _ => this.noti_count--);
+
+        Echo.private('App.Models.User.' + User.id())
+            .notification((notification) => {
+                this.noti_count++;
+            });
     }
 }
 </script>

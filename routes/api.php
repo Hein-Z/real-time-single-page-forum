@@ -28,7 +28,10 @@ Route::post('/notification', 'NotificationController@getNoti');
 Route::get('/markAsRead/{id}', 'NotificationController@markAsRead');
 
 
-Route::get('/{reply}/likes', 'LikeController@getAllLikes');
+Route::get('/{reply}/get-likes', 'LikeController@getAllLikes');
+Route::post('/{reply}/like', 'LikeController@like');
+Route::post('/{reply}/unlike', 'LikeController@unlike');
+
 
 Route::group([
     'middleware' => 'api',

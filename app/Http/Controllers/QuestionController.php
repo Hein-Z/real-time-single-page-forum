@@ -60,7 +60,7 @@ class QuestionController extends Controller
     public function show($slug)
     {
         $question = Question::where('slug', $slug)->with('user', 'category')->first();
-        $replies = $question->replies()->with('user')->get();
+        $replies = $question->replies()->with('user', 'likes')->get();
         return \response()->json(['question' => $question, 'replies' => $replies]);
     }
 

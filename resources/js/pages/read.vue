@@ -56,9 +56,7 @@ export default {
     }),
     methods: {
         createReply(data) {
-            // let reply=data.reply;
-            // reply.user=
-            this.replies.push(data.reply);
+            this.replies.unshift(data.reply);
         }
     },
     created() {
@@ -67,7 +65,7 @@ export default {
                 this.question = res.data.question;
                 this.user_name = res.data.question.user.name;
                 this.category = res.data.question.category.name;
-                this.replies = res.data.replies
+                this.replies = res.data.replies.slice().reverse().map(reply => reply);
             }
         ).catch(err => console.log(err.response));
     }

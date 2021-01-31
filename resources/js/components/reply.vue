@@ -1,5 +1,5 @@
 <template>
-    <v-card class="mt-2" >
+    <v-card class="mt-2">
         <v-card-text class="headline font-weight-bold">
             "{{ reply.body }}"
         </v-card-text>
@@ -22,10 +22,10 @@
                     align="center"
                     justify="end"
                 >
-                    <v-icon class="mr-1">
+                    <v-icon class="mr-1" @click="like" :color="likeColor()">
                         mdi-heart
                     </v-icon>
-                    <span class="subheading mr-2">256</span>
+                    <span class="subheading mr-2">{{ like_count }}</span>
                 </v-row>
             </v-list-item>
         </v-card-actions>
@@ -33,6 +33,45 @@
 </template>
 <script>
 export default {
-    props: ['reply','current_user_id'],
+    props: ['reply', 'current_user_id'],
+    data() {
+        return {
+            isLiked: false,
+            like_count: 0
+        }
+    },
+    methods: {
+        like() {
+            if (this.isLiked) {
+                axios.post(`api/${this.reply.id}/unlike`).then(res => {
+                    this.like_count--;
+                    this.isLiked = false;
+                }).catch();
+            } else {
+                axios.post(`api/${this.reply.id}/like`).then(res => {
+                    this.like_count++;
+                    this.isLiked = true;
+                }).catch();
+            }
+        },
+        likeColor() {
+            return !!this.isLiked ? 'red lighten-2' : '';
+        }
+    },
+    created() {
+        Echo.channel('like-channel')
+            .listen('LikeEvent', (e) => {
+                if (e.id === this.reply.id) {
+                    if (e.type === 'like') {
+                        this.like_count++;
+                    }
+                    if ((e.type === 'unlike')) {
+                        this.like_count--;
+                    }
+                }
+            });
+        this.isLiked = !!this.reply.likes.find(like => like.user_id === User.id());
+        this.like_count = this.reply.likes.length;
+    }
 }
 </script>

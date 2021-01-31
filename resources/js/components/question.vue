@@ -31,15 +31,15 @@
                             <v-list-item-title>{{ userName }}</v-list-item-title>
                         </v-list-item-content>
 
-                        <v-row
-                            align="center"
-                            justify="end"
-                        >
-                            <v-icon class="mr-1">
-                                mdi-heart
-                            </v-icon>
-                            <span class="subheading mr-2">256</span>
-                        </v-row>
+                        <!--                        <v-row-->
+                        <!--                            align="center"-->
+                        <!--                            justify="end"-->
+                        <!--                        >-->
+                        <!--                            <v-icon class="mr-1">-->
+                        <!--                                mdi-heart-->
+                        <!--                            </v-icon>-->
+                        <!--                            <span class="subheading mr-2">256</span>-->
+                        <!--                        </v-row>-->
                     </v-list-item>
                 </v-card-actions>
             </v-card>
